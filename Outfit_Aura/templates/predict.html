@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css" />
+    <title>AuraFit</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<style>
+
+
+    .nav-bg {
+            background: linear-gradient(35deg, red, purple);
+        }
+    .body-bg {
+            background: linear-gradient(35deg, red, purple);
+        }
+
+
+.suggest-btn {
+  background-color:red; /* Green */
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+    .grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  background-color: #2196F3;
+
+}
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
+
+</style>
+
+
+</head>
+<body >
+    <nav class="nav nav_top nav-bg">
+        <div class="logo">
+            <a href="#"><img src="/static/images/logo.png" width="250"></a>
+        </div>
+        <div class="nav_side">
+            <a href="/">Home</a>
+            <a href="/matches">Find Matches</a>
+            <a href="/contact">Contact Us</a>
+        </div>
+    </nav>
+    <br> <br> <br>
+
+
+    <div style="
+    display: inline-block;
+    position: fixed;
+    top: 50px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 80%;
+    height: 75%;
+    margin: auto;
+    background-color: #2196F3">
+
+   <center> <h1 style="color:white;">Displaying Top 3 selected items</h1></center>
+        <br> <br>
+<form method="post" action="/result">
+
+
+<div class="grid-container">
+    <div class="grid-item"><img src="{{selected_images[0]}}" alt="" width="400" height="500"></div>
+    <div class="grid-item"><img src="{{selected_images[1]}}" alt="" width="400" height="500"></div>
+    <div class="grid-item"><img src="{{selected_images[2]}}" alt="" width="400" height="500"></div>
+    <div class="grid-item"><center><input type="checkbox" class="radio" value="{{selected_images[0]}}" name="selected_image" /></center></div>
+    <div class="grid-item"><center><input type="checkbox" class="radio" value="{{selected_images[1]}}" name="selected_image" /></center></div>
+    <div class="grid-item"><center><input type="checkbox" class="radio" value="{{selected_images[2]}}" name="selected_image" /></center></div>
+</div>
+   <br>
+{% if is_dress == 'yes' %}
+    <center><button class="suggest-btn"  type="submit" name="predict">Proceed</button></center>
+{% else %}
+    <center><button class="suggest-btn"  type="submit" name="predict">Predict Outfit</button></center>
+{% endif %}
+
+</form>
+</div>
+    <script>
+
+$("input:checkbox").on('click', function() {
+  var $current_container = $(this);
+  if ($current_container.is(":checked")) {
+    var group = "input:checkbox[name='" + $current_container.attr("name") + "']";
+    $(group).prop("checked", false);
+    $current_container.prop("checked", true);
+  } else {
+    $current_container.prop("checked", false);
+  }
+});
+</script>
+
+ <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+</body>
+</html>
